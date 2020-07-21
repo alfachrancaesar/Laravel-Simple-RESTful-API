@@ -1,4 +1,7 @@
-**Simple RESTful API using Laravel Framework**
+**SIMPLE RESTFUL API USING LARAVEL FRAMEWORK & JWT AUTHENTICATION**
+
+
+
 
 --------------------------------------------------------------------------------
 
