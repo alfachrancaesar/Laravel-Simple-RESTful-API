@@ -5,44 +5,44 @@
 
 ## **STEP 1: Install Laravel 5.4.***
 
-composer create-project --prefer-dist laravel/laravel simple-restful "5.4."
+``` composer create-project --prefer-dist laravel/laravel simple-restful "5.4." ```
 
 
 
 ## **STEP 2: Install Dingo Package**
 
 -> Add Dingo to composer.json
-
+```
 "require": {
     "dingo/api": "2.0.0-alpha1"
 }
-
+```
 -> Register Service Provider in app.php
-Dingo\Api\Provider\LaravelServiceProvider::class
+``` Dingo\Api\Provider\LaravelServiceProvider::class ```
 
 -> Update composer and publish vendor in Terminal
-php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"
+``` php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider" ```
 
 
 
 ## **STEP 3: Add API Prefix**
 
 -> Add the following lines to .env file
-
+```
 API_PREFIX=api
 API_DEBUG=true
-
+```
 
 
 ## **STEP 4: Creating Endpoint API**
 
 -> Add the following lines to route/api.php
-
+```
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', ['namespace' => 'App\Http\Controllers'], function($api){
 	contains RESTful methods (GET, POST, PUT, DELETE)
 });
-
+```
 
 
 ## **STEP 5: Database Configuration**
@@ -57,7 +57,7 @@ Set database name
 
 -> Migrate the database from terminal
 
-php artisan migrate
+``` php artisan migrate ```
 
 
 
@@ -65,25 +65,25 @@ php artisan migrate
 
 -> Make user table seeder from terminal
 
-php artisan make:seeder UsersTableSeeder
+``` php artisan make:seeder UsersTableSeeder ```
 
 -> Create 5 fakers data in UsersTableSeeder.php
-
+```
 public function run()
     {
         factory(App\User::class,5)->create();
     }
-
+```
 -> Then, call the seeder from User to the main seeder inside DatabaseSeeder.php
-
+```
 public function run()
     {
           $this->call(UsersTableSeeder::class);
     }
-
+```
 -> In Terminal
 
-php artisan db:seed
+``` php artisan db:seed ```
 
 
 
@@ -91,11 +91,11 @@ php artisan db:seed
 
 -> Create APIUserController (contains RESTful methods) from terminal
 
-php artisan make:controller APIUserController
+``` php artisan make:controller APIUserController ```
 
 -> Then, serve
 
-php artisan serve
+``` php artisan serve ```
 
 
 
@@ -141,32 +141,32 @@ DELETE localhost:8000/api/users/id
 
 
 ## **STEP 10: JWT Authentication**
-
+		
 -> Add Tymon JWT Library in composer.json
-
+```
 "require": {
     "tymon/jwt-auth": "0.5.*"
 }
-
+```
 -> Add the providers and aliases in app.php
-
+```
 'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
 'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
 'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory'
-
+```
 -> Publish config in terminal
-
+```
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\JWTAuthServiceProvider"
 
 php artisan jwt:generate
-
+```
 
 
 ## **STEP 11: Creating Login Function and Token**
 
 -> Create APIAuthController in API folder as well as APIUserController
 
-php artisan make:controller API\APIAuthController
+``` php artisan make:controller API\APIAuthController ```		
 
 -> Check APIAuthController for detail explanation
 
@@ -176,7 +176,7 @@ php artisan make:controller API\APIAuthController
 
 -> Add new route in api.php 
 
-$api->post('login','API\AuthController@login');
+``` $api->post('login','API\AuthController@login'); ```
 
 -> In POSTMAN, create new request
 
