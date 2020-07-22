@@ -1,6 +1,6 @@
 # **SIMPLE RESTFUL API USING LARAVEL FRAMEWORK & JWT AUTHENTICATION**
 
-<b>
+<br>
 
 
 ## **STEP 1: Install Laravel 5.4.***
