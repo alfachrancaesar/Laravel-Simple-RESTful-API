@@ -1,76 +1,73 @@
-**SIMPLE RESTFUL API USING LARAVEL FRAMEWORK & JWT AUTHENTICATION**
+# **SIMPLE RESTFUL API USING LARAVEL FRAMEWORK & JWT AUTHENTICATION**
+
+<b>
 
 
-
-
---------------------------------------------------------------------------------
-
-
-**STEP 1: Install Laravel 5.4.***
+## **STEP 1: Install Laravel 5.4.***
 
 composer create-project --prefer-dist laravel/laravel simple-restful "5.4."
 
---------------------------------------------------------------------------------
 
-**STEP 2: Install Dingo Package**
 
--> Inside composer.json
+## **STEP 2: Install Dingo Package**
+
+-> Add Dingo to composer.json
 
 "require": {
     "dingo/api": "2.0.0-alpha1"
 }
 
--> Register Service Provider inside app.php
+-> Register Service Provider in app.php
 Dingo\Api\Provider\LaravelServiceProvider::class
 
--> composer update and publish vendor in Terminal
+-> Update composer and publish vendor in Terminal
 php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"
 
----------------------------------------------------------------------------------
 
-**STEP 3: Add API Prefix**
 
--> Inside .env
+## **STEP 3: Add API Prefix**
+
+-> Add the following lines to .env file
 
 API_PREFIX=api
 API_DEBUG=true
 
----------------------------------------------------------------------------------
 
-**STEP 4: Creating Endpoint API**
 
--> Inside route/api.php
+## **STEP 4: Creating Endpoint API**
+
+-> Add the following lines to route/api.php
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', ['namespace' => 'App\Http\Controllers'], function($api){
 	contains RESTful methods (GET, POST, PUT, DELETE)
 });
 
-----------------------------------------------------------------------------------
 
-**STEP 5: Database Configuration**
 
--> Inside .env
+## **STEP 5: Database Configuration**
+
+-> Open .env file
 
 Set database name
 
-----------------------------------------------------------------------------------
 
-**STEP 6: Migrate User**
 
--> In terminal
+## **STEP 6: Migrate User**
+
+-> Migrate the database from terminal
 
 php artisan migrate
 
-----------------------------------------------------------------------------------
 
-**STEP 7: User Seeder**
 
--> In terminal
+## **STEP 7: User Seeder**
+
+-> Make user table seeder from terminal
 
 php artisan make:seeder UsersTableSeeder
 
--> Inside UsersTableSeeder.php, create 5 fakers data
+-> Create 5 fakers data in UsersTableSeeder.php
 
 public function run()
     {
@@ -88,11 +85,11 @@ public function run()
 
 php artisan db:seed
 
------------------------------------------------------------------------------------
 
-**STEP 8: RESTful Methods Implementation**
 
--> In Terminal, create APIUserController (contains RESTful methods)
+## **STEP 8: RESTful Methods Implementation**
+
+-> Create APIUserController (contains RESTful methods) from terminal
 
 php artisan make:controller APIUserController
 
@@ -100,9 +97,9 @@ php artisan make:controller APIUserController
 
 php artisan serve
 
-----------------------------------------------------------------------------------
 
-**STEP 9: POSTMAN REST Client**
+
+## **STEP 9: POSTMAN REST Client**
 
 Web Apps	vs	Web Service (RESTful)
 
@@ -141,17 +138,17 @@ DELETE localhost:8000/api/users/id
 -> Change url /id to which id you want to be deleted (int)
 -> Send DELETE
 
-----------------------------------------------------------------------------------
 
-**STEP 10: JWT Authentication**
 
--> Inside composer.json, install tymon jwt library
+## **STEP 10: JWT Authentication**
+
+-> Add Tymon JWT Library in composer.json
 
 "require": {
-    "tymon/jwt-auth": "0.5."
+    "tymon/jwt-auth": "0.5.*"
 }
 
--> Inside app.php, add in the providers and aliases
+-> Add the providers and aliases in app.php
 
 'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
 'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
@@ -163,9 +160,9 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\JWTAuthServicePro
 
 php artisan jwt:generate
 
-----------------------------------------------------------------------------------
 
-**STEP 11: Creating Login Function and Token**
+
+## **STEP 11: Creating Login Function and Token**
 
 -> Create APIAuthController in API folder as well as APIUserController
 
@@ -173,9 +170,9 @@ php artisan make:controller API\APIAuthController
 
 -> Check APIAuthController for detail explanation
 
-----------------------------------------------------------------------------------
 
-**STEP 12: Login Endpoint in POSTMAN**
+
+## **STEP 12: Login Endpoint in POSTMAN**
 
 -> Add new route in api.php 
 
@@ -187,9 +184,9 @@ POST localhost:8000/api/login
 -> Change the body to email and password matching the database
 -> Successfully logged in!
 
-----------------------------------------------------------------------------------
 
-**STEP 13: Creating JWT Auth Middleware**
+
+## **STEP 13: Creating JWT Auth Middleware**
 
 -> Add route middleware in Kernel.php
 -> Check Kernel.php for the routes
@@ -200,9 +197,9 @@ GET localhost:8000/api/users
 -> Change the headers and add Authorization with the value of Bearer + token
 -> Data are obtained as user!
 
-----------------------------------------------------------------------------------
 
-**STEP 14: Creating Logout Function**
+
+## **STEP 14: Creating Logout Function**
 
 -> Open the APIAuthController and add the logout function
 -> Check the APIAuthController for detailed function
